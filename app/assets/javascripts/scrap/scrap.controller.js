@@ -1,14 +1,16 @@
-angular
-  .module('app.scrap')
-  .controller('ScrapController', Controller);
+;(function () {
+  angular
+    .module('app.scrap')
+    .controller('ScrapController', Controller);
 
-Controller.$inject = ['cheatsheets'];
+  Controller.$inject = ['cheatsheets'];
 
-function Controller (cheatsheets) {
-  var vm = this;
+  function Controller (cheatsheets) {
+    var vm = this;
 
-  vm.cheatsheets = cheatsheets;
+    vm.cheatsheets = cheatsheets;
 
-  vm.name = 'asdf';
-  vm.body = 'qwer';
-}
+    vm.name = 'asdf';
+    vm.body = 'qwer';
+  }
+})();
