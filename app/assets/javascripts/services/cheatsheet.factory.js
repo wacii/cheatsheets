@@ -2,12 +2,12 @@ angular
   .module('app.services')
   .factory('Cheatsheet', Cheatsheet);
 
-Cheatsheet.$inject = ['$http'];
+Cheatsheet.$inject = ['$http', 'CheatsheetModel', 'CheatsheetCollection'];
 
-function Cheatsheet ($http) {
+function Cheatsheet ($http, CheatsheetModel, CheatsheetCollection) {
   return {
     all: function all () {
-      var cheatsheets = new _CheatsheetCollection_();
+      var cheatsheets = new CheatsheetCollection();
 
       return $http.get('/cheatsheets').then(
         function (resp) {
@@ -18,7 +18,7 @@ function Cheatsheet ($http) {
     },
 
     find: function find (id) {
-      var cheatsheet = new _Cheatsheet_();
+      var cheatsheet = new CheatsheetModel();
 
       return $http.get('/cheatsheets/' + id).then(
         function (resp) {
@@ -30,7 +30,7 @@ function Cheatsheet ($http) {
     },
 
     search: function search (query) {
-      var cheatsheets = new _CheatsheetCollection_();
+      var cheatsheets = new CheatsheetCollection();
 
       return $http.get('/cheatsheets?s=' + query).then(
         function (resp) {

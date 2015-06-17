@@ -5,9 +5,11 @@ describe('Cheatsheet factory', function () {
 
   var $httpBackend;
   var factory;
-  beforeEach(inject(function (_$httpBackend_, Cheatsheet) {
+  var CheatsheetModel
+  beforeEach(inject(function (_$httpBackend_, Cheatsheet, _CheatsheetModel_) {
     $httpBackend = _$httpBackend_;
     factory = Cheatsheet;
+    CheatsheetModel = _CheatsheetModel_;
 
     $httpBackend.whenGET('/cheatsheets').respond(200, [
       { id: 1, name: 'asdf' },
@@ -38,10 +40,10 @@ describe('Cheatsheet factory', function () {
 
       $httpBackend.flush();
       expect(value).toEqual(
-        jasmine.arrayContaining([new _Cheatsheet_({ id: 1, name: 'asdf' })])
+        jasmine.arrayContaining([new CheatsheetModel({ id: 1, name: 'asdf' })])
       );
       expect(value).toEqual(
-        jasmine.arrayContaining([new _Cheatsheet_({ id: 2, name: 'qwer' })])
+        jasmine.arrayContaining([new CheatsheetModel({ id: 2, name: 'qwer' })])
       );
     });
   });
@@ -74,10 +76,10 @@ describe('Cheatsheet factory', function () {
 
       $httpBackend.flush();
       expect(value).not.toEqual(
-        jasmine.arrayContaining([new _Cheatsheet_({ id: 1, name: 'asdf' })])
+        jasmine.arrayContaining([new CheatsheetModel({ id: 1, name: 'asdf' })])
       );
       expect(value).toEqual(
-        jasmine.arrayContaining([new _Cheatsheet_({ id: 2, name: 'qwer' })])
+        jasmine.arrayContaining([new CheatsheetModel({ id: 2, name: 'qwer' })])
       );
     });
   })
