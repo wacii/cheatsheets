@@ -21,9 +21,9 @@ function factory ($http, ItemCollection) {
 
   CheatsheetModel.prototype.save = function save () {
     if (this.id === undefined) {
-      $http.post('/cheatsheets', this.attributes);
+      $http.post('/cheatsheets', { cheatsheet: this.attributes });
     } else {
-      $http.patch('/cheatsheets/' + this.id, this.attributes);
+      $http.patch('/cheatsheets/' + this.id, { cheatsheet: this.attributes });
     }
   };
 

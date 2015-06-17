@@ -18,9 +18,9 @@ function factory ($http) {
 
   ItemModel.prototype.save = function save () {
     if (this.id === undefined) {
-      $http.post('/items', this.attributes);
+      $http.post('/items', { item: this.attributes });
     } else {
-      $http.patch('/items/' + this.id, this.attributes);
+      $http.patch('/items/' + this.id, { item: this.attributes });
     }
   };
 
