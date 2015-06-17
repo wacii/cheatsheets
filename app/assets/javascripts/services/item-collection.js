@@ -14,15 +14,6 @@
       array.remove = this.remove;
       array.cheatsheet = cheatsheet;
 
-      Object.defineProperty(array, 'attributes', {
-        get: function () {
-          var attrs = [];
-          for (var i = 0; i < this.length; i++)
-            attrs.push(this[i].attributes);
-          return attrs;
-        }
-      });
-
       array.add(models);
       return array;
     }

@@ -9,14 +9,11 @@
     function CheatsheetModel (attributes) {
       this.title = '';
       this.set(attributes);
-
-      var _items = this.items;
-      this.items = new ItemCollection(_items, this);
     }
 
     Object.defineProperty(CheatsheetModel.prototype, 'attributes', {
       get: function () {
-        return { title: this.title, items_attributes: this.items.attributes };
+        return { title: this.title };
       }
     });
 

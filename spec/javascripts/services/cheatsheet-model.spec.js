@@ -25,17 +25,6 @@ describe('CheatsheetModel', function () {
         title: 'asdf'
       }));
     });
-
-    it('returns items as items_attributes', function () {
-      expect(model.attributes).toEqual(jasmine.objectContaining({
-        items_attributes: jasmine.any(Array)
-      }));
-
-      model.items.add([{ id: 1, title: 'asdf' }]);
-      expect(model.attributes).toEqual(jasmine.objectContaining({
-        items_attributes: jasmine.any(Array)
-      }));
-    });
   });
 
   describe('#save()', function () {
