@@ -7,5 +7,8 @@
   = stylesheet_link_tag "#{root_url}/semantic.min.css"
   = javascript_include_tag "#{root_url}/semantic.min.js"
 
+%p= notice
+%p= alert
+
 %div(ng-app='app')
   %div(ng-view)
