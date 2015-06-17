@@ -1,3 +1,5 @@
+//= require spec_helper
+
 describe('CheatsheetCollection', function () {
   beforeEach(angular.mock.module('app.services'))
 
@@ -14,7 +16,7 @@ describe('CheatsheetCollection', function () {
   beforeEach(inject(function (_CheatsheetCollection_) {
     CheatsheetCollection = _CheatsheetCollection_;
     collection = new CheatsheetCollection;
-  }))
+  }));
 
   describe('#add()', function () {
     it('adds models', function () {

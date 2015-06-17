@@ -27,12 +27,11 @@ describe('CheatsheetModel', function () {
     });
 
     it('returns items as items_attributes', function () {
-      model.items = undefined;
       expect(model.attributes).toEqual(jasmine.objectContaining({
         items_attributes: jasmine.any(Array)
       }));
 
-      model.items = [{ id: 1, title: 'asdf' }];
+      model.items.add([{ id: 1, title: 'asdf' }]);
       expect(model.attributes).toEqual(jasmine.objectContaining({
         items_attributes: jasmine.any(Array)
       }));

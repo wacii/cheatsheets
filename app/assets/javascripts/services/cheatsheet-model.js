@@ -2,17 +2,20 @@ angular
   .module('app.services')
   .factory('CheatsheetModel', factory);
 
-factory.$inject = ['$http'];
+factory.$inject = ['$http', 'ItemCollection'];
 
-function factory ($http) {
+function factory ($http, ItemCollection) {
   function CheatsheetModel (attributes) {
     this.title = '';
     this.set(attributes);
+
+    var _items = this.items;
+    this.items = new ItemCollection(_items);
   }
 
   Object.defineProperty(CheatsheetModel.prototype, 'attributes', {
     get: function () {
-      return { title: this.title, items_attributes: this.items || [] };
+      return { title: this.title, items_attributes: this.items.attributes };
     }
   });
 
