@@ -1,0 +1,7 @@
+- content_for :head do
+  - root_url = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1'
+  = javascript_include_tag "#{root_url}/angular.min.js"
+  = javascript_include_tag "#{root_url}/angular-route.min.js"
+
+%div(ng-app='app')
+  %div(ng-view)
