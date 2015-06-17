@@ -17,8 +17,9 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 4.5'
   gem 'jasmine-rails'
+  gem 'shoulda-matchers', '~> 2.8.0'
 end
 
 gem 'devise'
