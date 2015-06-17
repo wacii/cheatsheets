@@ -15,8 +15,22 @@ describe('_Cheatsheet_', function () {
   describe('#attributes', function () {
     it('gets models attributes', function () {
       model.name = 'asdf';
-      expect(model.attributes).toEqual({ name: 'asdf' });
-    })
+      expect(model.attributes).toEqual(jasmine.objectContaining({
+        name: 'asdf'
+      }));
+    });
+
+    it('returns items as items_attributes', function () {
+      model.items = undefined;
+      expect(model.attributes).toEqual(jasmine.objectContaining({
+        items_attributes: jasmine.any(Array)
+      }));
+
+      model.items = [{ id: 1, name: 'asdf' }];
+      expect(model.attributes).toEqual(jasmine.objectContaining({
+        items_attributes: jasmine.any(Array)
+      }));
+    });
   });
 
   describe('#save()', function () {

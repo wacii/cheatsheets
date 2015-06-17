@@ -4,7 +4,9 @@ function _Cheatsheet_ (attributes) {
 }
 
 Object.defineProperty(_Cheatsheet_.prototype, 'attributes', {
-  get: function () { return { name: this.name }; }
+  get: function () {
+    return { name: this.name, items_attributes: this.items || [] };
+  }
 });
 
 _Cheatsheet_.prototype.save = function save () {
