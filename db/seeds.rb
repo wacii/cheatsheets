@@ -26,18 +26,22 @@ when 'development'
     cheatsheet1.items.create(name: items[i], description: descriptions[i], rank: i)
     i += 1
   end
+  i=0
   5.times do
     cheatsheet2.items.create(name: items[i], description: descriptions[i], rank: i)
     i += 1
   end
+  i=0
   5.times do
     cheatsheet3.items.create(name: items[i], description: descriptions[i], rank: i)
     i += 1
   end
+  i=0
   5.times do
     cheatsheet4.items.create(name: items[i], description: descriptions[i], rank: i)
     i += 1
   end
+  i=0
   5.times do
     i += 1
     cheatsheet5.items.create(name: items[i], description: descriptions[i], rank: i)

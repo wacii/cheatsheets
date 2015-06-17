@@ -9,23 +9,25 @@ function Cheatsheet ($http) {
     all: function all () {
       var cheatsheets = new _CheatsheetCollection_();
 
-      $http.get('/cheatsheets')
+      $http.get('/cheatsheets.json')
         .success(angular.bind(cheatsheets, cheatsheets.add));
       // TODO: handle failure
 
       return cheatsheets;
+      console.log(cheatsheets);
     },
 
-    add: function add (cheatsheet) {
-      $http.post("/cheatsheets.json", cheatsheet).
-      success(function(data){
-        cheatsheets.push(data.cheatsheet)
-        return data.cheatsheet;
-      }).
-      error(function(data) {
-
-      });
-    },
+    // add: function add (cheatsheet) {
+    //   console.log(cheatsheet);
+    //   $http.post("/cheatsheets.json", cheatsheet).
+    //   success(function(data){
+    //     cheatsheets.push(data.cheatsheet)
+    //     return data.cheatsheet;
+    //   }).
+    //   error(function(data) {
+    //
+    //   });
+    // },
     find: function find (id) {
       var cheatsheet = new _Cheatsheet_();
 
