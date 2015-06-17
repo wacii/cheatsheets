@@ -6,11 +6,12 @@
   factory.$inject = ['$http', 'ItemModel'];
 
   function factory ($http, ItemModel) {
-    function ItemCollection (models) {
+    function ItemCollection (models, cheatsheet) {
       var array = [];
 
       array.add = this.add;
       array.create = this.create;
+      array.cheatsheet = cheatsheet;
 
       Object.defineProperty(array, 'attributes', {
         get: function () {
@@ -33,8 +34,10 @@
     }
 
     ItemCollection.prototype.create = function create (attributes) {
+      if (this.cheatsheet === undefined || this.cheatsheet.id === undefined)
+        throw new Error('parent must be persisted')
       var item = new ItemModel(attributes);
-      item.save();
+      item.save(this.cheatsheet.id);
       this.push(item);
       return item;
     };

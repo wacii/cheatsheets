@@ -9,6 +9,10 @@
     var vm = this;
 
     vm.cheatsheets = cheatsheets;
+    vm.newCheatsheet = { title: '' };
+
+    vm.cheatsheet = cheatsheets[0];
+    vm.newItem = { name: '', description: '' };
 
     vm.name = 'asdf';
     vm.body = 'qwer';

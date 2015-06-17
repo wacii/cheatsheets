@@ -3,5 +3,5 @@ class Item < ActiveRecord::Base
   validates :name, presence: true
   validates :description, presence: true
   validates :cheatsheet, presence: true
-  validates :rank, presence: true
+  # validates :rank, presence: true
 end

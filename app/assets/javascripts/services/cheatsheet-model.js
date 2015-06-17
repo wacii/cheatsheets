@@ -11,7 +11,7 @@
       this.set(attributes);
 
       var _items = this.items;
-      this.items = new ItemCollection(_items);
+      this.items = new ItemCollection(_items, this);
     }
 
     Object.defineProperty(CheatsheetModel.prototype, 'attributes', {

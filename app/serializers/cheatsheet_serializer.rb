@@ -1,4 +1,4 @@
 class CheatsheetSerializer < ActiveModel::Serializer
-  attributes :title
+  attributes :id, :title
   has_many :items
 end

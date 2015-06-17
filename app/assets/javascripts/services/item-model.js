@@ -17,11 +17,12 @@
       }
     });
 
-    ItemModel.prototype.save = function save () {
+    ItemModel.prototype.save = function save (cheatsheetId) {
+      var url = '/cheatsheets/' + cheatsheetId;
       if (this.id === undefined) {
-        $http.post('/items', { item: this.attributes });
+        $http.post(url + '/items', { item: this.attributes });
       } else {
-        $http.patch('/items/' + this.id, { item: this.attributes });
+        $http.patch(url + '/items/' + this.id, { item: this.attributes });
       }
     };
 

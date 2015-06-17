@@ -1,4 +1,4 @@
-%h3 This is a template
+%h2 This is a template
 
 %p
   name:
@@ -11,4 +11,24 @@
   input:
   %span(ng-bind='vm.body')
 
-%p(ng-bind='vm.cheatsheets')
+/
+%h3 Cheatsheets
+
+%div(ng-repeat='cheatsheet in vm.cheatsheets')
+  %span(ng-bind='cheatsheet.title')
+
+%input(ng-model='vm.newCheatsheet.title')
+%input(type='submit' ng-click='vm.cheatsheets.create(vm.newCheatsheet)')
+
+/
+%h3 Cheatsheet with Items
+
+%h4(ng-bind='vm.cheatsheet.title')
+%ul
+  %li(ng-repeat='item in vm.cheatsheet.items')
+    %span(ng-bind='item.name')
+    %span(ng-bind='item.description')
+
+%input(ng-model='vm.newItem.name')
+%input(ng-model='vm.newItem.description')
+%input(type='submit' ng-click='vm.cheatsheet.items.create(vm.newItem)')
