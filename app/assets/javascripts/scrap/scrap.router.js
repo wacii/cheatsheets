@@ -1,15 +1,18 @@
 angular
-  .module('app')
+  .module('app.scrap')
   .config(config);
-
-config.$inject = ['$routeProvider'];
 
 function config ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'scrap.template.html',
       controller: 'ScrapController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      resolve: {
+        cheatsheets: function (Cheatsheet) {
+          return Cheatsheet.all();
+        }
+      }
     })
     .otherwise('/');
 }

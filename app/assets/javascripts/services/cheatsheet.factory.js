@@ -13,8 +13,7 @@ function Cheatsheet ($http) {
         function (resp) {
           cheatsheets.add(resp.data);
           return cheatsheets;
-        },
-        angular.identity
+        }
       );
     },
 

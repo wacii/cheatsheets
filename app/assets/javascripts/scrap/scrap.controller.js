@@ -2,10 +2,12 @@ angular
   .module('app.scrap')
   .controller('ScrapController', Controller);
 
-Controller.$inject = [];
+Controller.$inject = ['cheatsheets'];
 
-function Controller () {
+function Controller (cheatsheets) {
   var vm = this;
+
+  vm.cheatsheets = cheatsheets;
 
   vm.name = 'asdf';
   vm.body = 'qwer';
