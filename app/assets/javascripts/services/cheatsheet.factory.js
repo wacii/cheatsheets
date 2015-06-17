@@ -10,7 +10,7 @@ function Cheatsheet ($http) {
       var cheatsheets = new _CheatsheetCollection_();
 
       $http.get('/cheatsheets')
-        .done(angular.bind(cheatsheets, cheatsheets.add));
+        .success(angular.bind(cheatsheets, cheatsheets.add));
       // TODO: handle failure
 
       return cheatsheets;
@@ -20,7 +20,7 @@ function Cheatsheet ($http) {
       var cheatsheet = new _Cheatsheet_();
 
       $http.get('/cheatsheets/' + id)
-        .done(angular.bind(cheatsheet, cheatsheet.set));
+        .success(angular.bind(cheatsheet, cheatsheet.set));
       // TODO: handle failure
 
       return cheatsheet;
@@ -30,7 +30,7 @@ function Cheatsheet ($http) {
       var cheatsheets = new _CheatsheetCollection_();
 
       $http.get('/cheatsheets?s=' + query)
-        .done(angular.bind(cheatsheets, cheatsheets.add));
+        .success(angular.bind(cheatsheets, cheatsheets.add));
       // TODO: handle failure
 
       return cheatsheets;

@@ -7,9 +7,9 @@ describe('Cheatsheet factory', function () {
   beforeEach(function () {
     $http = jasmine.createSpyObj('$http', ['get']);
 
-    var xhr = jasmine.createSpyObj('xhr', ['done', 'fail']);
-    xhr.done.and.returnValue(xhr);
-    xhr.fail.and.returnValue(xhr);
+    var xhr = jasmine.createSpyObj('xhr', ['success', 'error']);
+    xhr.success.and.returnValue(xhr);
+    xhr.error.and.returnValue(xhr);
 
     $http.get.and.returnValue(xhr);
 
