@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Item, :type => :model do
   it 'has a valid Factory' do

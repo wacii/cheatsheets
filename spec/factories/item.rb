@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :cheatsheet do
+  factory :item do
     sequence(:title) { |n| "CheatSheet Item ##{n}" }
     description { Faker::Lorem.sentence }
     association :cheatsheet
