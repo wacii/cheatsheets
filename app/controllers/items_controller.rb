@@ -35,8 +35,8 @@ class ItemsController < ApplicationController
   end
 
   def insert_at
-    @item = Item.find(params[:id])
-    @item.insert_at(params[:position])
+    @item = Item.find(params[:item_id])
+    @item.insert_at(params[:position].to_i)
     render json: @item
   end
 
