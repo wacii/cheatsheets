@@ -4,4 +4,6 @@ class Item < ActiveRecord::Base
   validates :description, presence: true
   validates :cheatsheet, presence: true
   # validates :rank, presence: true
+
+  acts_as_list column: 'rank', scope: :cheatsheet
 end

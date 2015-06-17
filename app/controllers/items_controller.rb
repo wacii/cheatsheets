@@ -34,6 +34,12 @@ class ItemsController < ApplicationController
     head 200
   end
 
+  def insert_at
+    @item = Item.find(params[:id])
+    @item.insert_at(params[:position])
+    render json: @item
+  end
+
   private
 
   def item_params

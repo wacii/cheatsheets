@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#index'
   resources :cheatsheets, except: [:new, :edit] do
-    resources :items, except: [:new, :edit], shallow: true
+    resources :items, except: [:new, :edit], shallow: true do
+      post :insert_at, as: :member
+    end
   end
 end
