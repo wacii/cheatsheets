@@ -7,9 +7,13 @@ config.$inject = ['$routeProvider'];
 function config ($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'scrap.template.html',
-      controller: 'ScrapController',
-      controllerAs: 'vm'
+      templateUrl: 'cheatsheet.index.html',
+      controller: 'CheatsheetCtrl',
+      controllerAs: 'Ctrl'
+
+      // templateUrl: 'scrap.template.html',
+      // controller: 'ScrapController',
+      // controllerAs: 'vm'
     })
     .otherwise('/');
 }

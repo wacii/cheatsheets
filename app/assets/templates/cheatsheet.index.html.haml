@@ -1,0 +1,28 @@
+%h3 CheatSheets
+.form-inline
+  %input.form-control(ng-model='query' type='text' placeholder='Search')
+  %form.form
+    .input-group
+      %input.form-control(type='text'
+                          ng-model='title'
+                          name='title'
+                          placeholder="Add a new cheatsheet?"
+                          required)
+      %span.input-group-btn
+        %button.btn.btn-primary(ng-click='addCheatSheet()') Add
+%ul.list-group(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
+  %li.list-group-item
+    %h5
+      %a{:href => "#!/cheatsheet/show/{{cheatsheet.id}}"}
+        %span(ng-bind="cheatsheet.title")
+      %span.glyphicon.glyphicon-trash.pull-right(ng-click='deleteCheatSheet(cheatsheet)')
+        %button.btn.btn-link.btn-xs.pull-right(ng-click='enableEditor()' id='edit-category-link')
+          %span.glyphicon.glyphicon-edit
+        %button.btn.btn-link.btn-xs.pull-right(ng-click='deleteCategory()' id='delete-category-link')
+          %span.glyphicon.glyphicon-trash
+      %ng-form.form-group.form(ng-controller='EditCategoryCtrl' name="editCategoryForm" ng-show='options.editorEnabled')
+        %input.form-control(type='text' name='edit-category-text' ng-model='category.name' required)
+        %button.btn.btn-link.btn-xs(ng-click='editCategory()') Save
+        %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
+      %a{:href => "#!/post/edit/{{post.id}}"}
+        %i.glyphicon.glyphicon-edit.pull-right

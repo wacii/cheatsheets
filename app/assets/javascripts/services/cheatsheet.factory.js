@@ -16,6 +16,16 @@ function Cheatsheet ($http) {
       return cheatsheets;
     },
 
+    add: function add (cheatsheet) {
+      $http.post("/cheatsheets.json", cheatsheet).
+      success(function(data){
+        cheatsheets.push(data.cheatsheet)
+        return data.cheatsheet;
+      }).
+      error(function(data) {
+
+      });
+    },
     find: function find (id) {
       var cheatsheet = new _Cheatsheet_();
 
