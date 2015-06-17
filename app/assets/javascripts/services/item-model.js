@@ -32,6 +32,8 @@
     };
 
     ItemModel.prototype.destroy = function destroy () {
+      if (this.id === undefined)
+        return this;
       $http.delete('/items/' + this.id);
     };
 

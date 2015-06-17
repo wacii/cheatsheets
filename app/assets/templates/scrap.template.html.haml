@@ -16,6 +16,7 @@
 
 %div(ng-repeat='cheatsheet in vm.cheatsheets')
   %span(ng-bind='cheatsheet.title')
+  %button(ng-click='vm.cheatsheets.remove(cheatsheet)') X
 
 %input(ng-model='vm.newCheatsheet.title')
 %input(type='submit' ng-click='vm.cheatsheets.create(vm.newCheatsheet)')
@@ -28,6 +29,7 @@
   %li(ng-repeat='item in vm.cheatsheet.items')
     %span(ng-bind='item.name')
     %span(ng-bind='item.description')
+    %button(ng-click='vm.cheatsheet.items.remove(item)') X
 
 %input(ng-model='vm.newItem.name')
 %input(ng-model='vm.newItem.description')

@@ -11,6 +11,7 @@
 
       array.add = this.add;
       array.create = this.create;
+      array.remove = this.remove;
       array.cheatsheet = cheatsheet;
 
       Object.defineProperty(array, 'attributes', {
@@ -41,6 +42,17 @@
       this.push(item);
       return item;
     };
+
+    ItemCollection.prototype.remove = function remove (obj) {
+      for (var i = 0; i < this.length; i++) {
+        var item = this[i];
+        if (item === obj || item.id === obj.id) {
+          this.splice(i, 1);
+          item.destroy();
+          return item;
+        }
+      }
+    }
 
     return ItemCollection;
   }

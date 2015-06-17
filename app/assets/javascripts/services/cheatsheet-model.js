@@ -34,6 +34,8 @@
     };
 
     CheatsheetModel.prototype.destroy = function destroy () {
+      if (this.id === undefined)
+        return this;
       $http.delete('/cheatsheets/' + this.id);
     };
 

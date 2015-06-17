@@ -11,6 +11,7 @@
 
       array.add = this.add;
       array.create = this.create;
+      array.remove = this.remove
 
       array.add(models);
       return array;
@@ -29,6 +30,17 @@
       this.push(cheatsheet);
       return cheatsheet;
     };
+
+    CheatsheetCollection.prototype.remove = function remove (obj) {
+      for (var i = 0; i < this.length; i++) {
+        var cheatsheet = this[i];
+        if (cheatsheet === obj || cheatsheet.id === obj.id) {
+          this.splice(i, 1);
+          cheatsheet.destroy();
+          return cheatsheet;
+        }
+      }
+    }
 
     return CheatsheetCollection;
   }

@@ -5,7 +5,7 @@ describe('CheatsheetCollection', function () {
 
   var $http;
   beforeEach(function () {
-    $http = jasmine.createSpyObj('$http', ['post'])
+    $http = jasmine.createSpyObj('$http', ['post', 'delete'])
     angular.mock.module({
       $http: $http
     });
@@ -22,32 +22,63 @@ describe('CheatsheetCollection', function () {
     it('adds models', function () {
       expect(collection.length).toEqual(0);
       collection.add([
-        { id: 1, name: 'asdf' },
-        { id: 2, name: 'qwer' }
+        { id: 1, title: 'asdf' },
+        { id: 2, title: 'qwer' }
       ]);
       expect(collection.length).toEqual(2);
 
       var model = collection[0];
-      expect(model.name).toEqual('asdf');
+      expect(model.title).toEqual('asdf');
     })
   });
 
   describe('#create()', function () {
     it('returns new _Cheatsheet_ object', function () {
-      var value = collection.create({ name: 'asdf' });
-      expect(value.name).toEqual('asdf');
+      var value = collection.create({ title: 'asdf' });
+      expect(value.title).toEqual('asdf');
       expect(value.save).not.toBeUndefined();
     });
 
     it('saves created object', function () {
-      collection.create({ name: 'asdf' });
+      collection.create({ title: 'asdf' });
       expect($http.post).toHaveBeenCalled();
     });
 
     it('pushes object', function () {
       spyOn(collection, 'push');
-      collection.create({ name: 'asdf' });
+      collection.create({ title: 'asdf' });
       expect(collection.push).toHaveBeenCalled();
     });
   });
+
+  describe('#remove()', function () {
+    var cheatsheet;
+    beforeEach(function () {
+      cheatsheet = { title: 'zxcv' };
+      collection.add([
+        { id: 1, title: 'asdf' },
+        { id: 2, title: 'qwer' },
+        cheatsheet
+      ]);
+    });
+
+    it('removes item from collection by id attribute', function () {
+      collection.remove({ id: 1, title: 'asdf' });
+      expect(collection).not.toEqual(jasmine.arrayContaining([
+        { id: 1, title: 'asdf' }
+      ]));
+    });
+
+    it('removes item from collection by object equivalence', function () {
+      collection.remove(cheatsheet);
+      expect(collection).not.toEqual(jasmine.arrayContaining([cheatsheet]));
+    });
+
+    it('calls destroy on removed item', function () {
+      cheatsheet = collection[0];
+      spyOn(cheatsheet, 'destroy');
+      collection.remove({ id: 1, title: 'asdf' });
+      expect(cheatsheet.destroy).toHaveBeenCalled();
+    });
+  })
 });
