@@ -1,2 +1,2 @@
 angular
-  .module('app.scrap', ['templates', 'ngRoute']);
+  .module('app.scrap', ['templates', 'ngRoute', 'app.services']);

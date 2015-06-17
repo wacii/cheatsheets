@@ -2,50 +2,43 @@ angular
   .module('app.services')
   .factory('Cheatsheet', Cheatsheet);
 
-Cheatsheet.$inject = ['$http'];
+Cheatsheet.$inject = ['$http', 'CheatsheetModel', 'CheatsheetCollection'];
 
-function Cheatsheet ($http) {
+function Cheatsheet ($http, CheatsheetModel, CheatsheetCollection) {
   return {
     all: function all () {
-      var cheatsheets = new _CheatsheetCollection_();
+      var cheatsheets = new CheatsheetCollection();
 
-      $http.get('/cheatsheets.json')
-        .success(angular.bind(cheatsheets, cheatsheets.add));
-      // TODO: handle failure
+      return $http.get('/cheatsheets').then(
+        function (resp) {
+          cheatsheets.add(resp.data);
+          return cheatsheets;
+        }
+      );
 
-      return cheatsheets;
-      console.log(cheatsheets);
     },
-
-    // add: function add (cheatsheet) {
-    //   console.log(cheatsheet);
-    //   $http.post("/cheatsheets.json", cheatsheet).
-    //   success(function(data){
-    //     cheatsheets.push(data.cheatsheet)
-    //     return data.cheatsheet;
-    //   }).
-    //   error(function(data) {
-    //
-    //   });
-    // },
     find: function find (id) {
-      var cheatsheet = new _Cheatsheet_();
+      var cheatsheet = new CheatsheetModel();
 
-      $http.get('/cheatsheets/' + id)
-        .success(angular.bind(cheatsheet, cheatsheet.set));
-      // TODO: handle failure
-
-      return cheatsheet;
+      return $http.get('/cheatsheets/' + id).then(
+        function (resp) {
+          cheatsheet.set(resp.data);
+          return cheatsheet;
+        },
+        angular.identity
+      );
     },
 
     search: function search (query) {
-      var cheatsheets = new _CheatsheetCollection_();
+      var cheatsheets = new CheatsheetCollection();
 
-      $http.get('/cheatsheets?s=' + query)
-        .success(angular.bind(cheatsheets, cheatsheets.add));
-      // TODO: handle failure
-
-      return cheatsheets;
+      return $http.get('/cheatsheets?s=' + query).then(
+        function (resp) {
+          cheatsheets.add(resp.data);
+          return cheatsheets;
+        },
+        angular.identity
+      );
     }
   };
 }
