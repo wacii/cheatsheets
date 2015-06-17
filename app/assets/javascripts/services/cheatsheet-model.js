@@ -6,13 +6,13 @@ factory.$inject = ['$http'];
 
 function factory ($http) {
   function CheatsheetModel (attributes) {
-    this.name = '';
+    this.title = '';
     this.set(attributes);
   }
 
   Object.defineProperty(CheatsheetModel.prototype, 'attributes', {
     get: function () {
-      return { name: this.name, items_attributes: this.items || [] };
+      return { title: this.title, items_attributes: this.items || [] };
     }
   });
 

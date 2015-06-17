@@ -20,9 +20,9 @@ describe('CheatsheetModel', function () {
 
   describe('#attributes', function () {
     it('gets models attributes', function () {
-      model.name = 'asdf';
+      model.title = 'asdf';
       expect(model.attributes).toEqual(jasmine.objectContaining({
-        name: 'asdf'
+        title: 'asdf'
       }));
     });
 
@@ -32,7 +32,7 @@ describe('CheatsheetModel', function () {
         items_attributes: jasmine.any(Array)
       }));
 
-      model.items = [{ id: 1, name: 'asdf' }];
+      model.items = [{ id: 1, title: 'asdf' }];
       expect(model.attributes).toEqual(jasmine.objectContaining({
         items_attributes: jasmine.any(Array)
       }));
@@ -84,9 +84,9 @@ describe('CheatsheetModel', function () {
 
   describe('#set()', function () {
     it('sets attributes', function () {
-      expect(model.name).toEqual('');
-      model.set({ name: 'asdf' })
-      expect(model.name).toEqual('asdf');
+      expect(model.title).toEqual('');
+      model.set({ title: 'asdf' })
+      expect(model.title).toEqual('asdf');
     });
 
     it('does not save changes', function () {
