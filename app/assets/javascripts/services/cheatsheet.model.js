@@ -41,7 +41,7 @@ function _CheatsheetCollection_ (models) {
 }
 
 _CheatsheetCollection_.prototype.add = function add (models) {
-  if (models === undefined) return;
+  if (models === undefined) return this;
 
   for (var i = 0; i < models.length; i++)
     this.push(new _Cheatsheet_(models[i]));

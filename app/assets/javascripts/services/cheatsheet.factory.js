@@ -9,31 +9,37 @@ function Cheatsheet ($http) {
     all: function all () {
       var cheatsheets = new _CheatsheetCollection_();
 
-      $http.get('/cheatsheets')
-        .success(angular.bind(cheatsheets, cheatsheets.add));
-      // TODO: handle failure
-
-      return cheatsheets;
+      return $http.get('/cheatsheets').then(
+        function (resp) {
+          cheatsheets.add(resp.data);
+          return cheatsheets;
+        },
+        angular.identity
+      );
     },
 
     find: function find (id) {
       var cheatsheet = new _Cheatsheet_();
 
-      $http.get('/cheatsheets/' + id)
-        .success(angular.bind(cheatsheet, cheatsheet.set));
-      // TODO: handle failure
-
-      return cheatsheet;
+      return $http.get('/cheatsheets/' + id).then(
+        function (resp) {
+          cheatsheet.set(resp.data);
+          return cheatsheet;
+        },
+        angular.identity
+      );
     },
 
     search: function search (query) {
       var cheatsheets = new _CheatsheetCollection_();
 
-      $http.get('/cheatsheets?s=' + query)
-        .success(angular.bind(cheatsheets, cheatsheets.add));
-      // TODO: handle failure
-
-      return cheatsheets;
+      return $http.get('/cheatsheets?s=' + query).then(
+        function (resp) {
+          cheatsheets.add(resp.data);
+          return cheatsheets;
+        },
+        angular.identity
+      );
     }
   };
 }
