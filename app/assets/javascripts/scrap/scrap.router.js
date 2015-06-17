@@ -5,16 +5,17 @@
 
   function config ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/scrap', {
         templateUrl: 'scrap.template.html',
         controller: 'ScrapController',
         controllerAs: 'vm',
-        resolve: {
-          cheatsheets: function (Cheatsheet) {
-            return Cheatsheet.all();
-          }
-        }
-      })
-      .otherwise('/');
+        resolve: { cheatsheets: getCheatsheets }
+      });
+  }
+
+  getCheatsheets.$inject = ['Cheatsheet'];
+
+  function getCheatsheets (Cheatsheet) {
+    return Cheatsheet.all();
   }
 })();
