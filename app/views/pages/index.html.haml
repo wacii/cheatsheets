@@ -3,5 +3,9 @@
   = javascript_include_tag "#{root_url}/angular.min.js"
   = javascript_include_tag "#{root_url}/angular-route.min.js"
 
+  - root_url = 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3'
+  = stylesheet_link_tag "#{root_url}/semantic.min.css"
+  = javascript_include_tag "#{root_url}/semantic.min.js"
+
 %div(ng-app='app')
   %div(ng-view)
