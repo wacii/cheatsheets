@@ -12,15 +12,15 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-end
 
-group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'factory_girl'
+  gem 'jasmine-rails'
 end
 
 gem 'devise'
+gem 'angularjs-rails'
 gem 'angular-rails-templates'

@@ -1,10 +1,4 @@
 - content_for :head do
-  - root_url = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1'
-  = javascript_include_tag "#{root_url}/angular.min.js"
-  = javascript_include_tag "#{root_url}/angular-route.min.js"
-
-  = javascript_include_tag "http://code.jquery.com/jquery-1.11.3.min.js"
-
   - root_url = 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3'
   = stylesheet_link_tag "#{root_url}/semantic.min.css"
   = javascript_include_tag "#{root_url}/semantic.min.js"

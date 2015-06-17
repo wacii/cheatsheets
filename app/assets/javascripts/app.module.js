@@ -1,2 +1,5 @@
 angular
-  .module('app', ['app.scrap']);
+  .module('app', [
+    'app.scrap',
+    'app.services'
+  ]);
