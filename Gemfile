@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.1'
+gem 'sprockets', '~> 2.12'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'haml-rails', '~> 0.9'
@@ -14,3 +15,4 @@ group :development, :test do
 end
 
 gem 'devise'
+gem 'angular-rails-templates'
