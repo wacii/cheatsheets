@@ -28,18 +28,6 @@
           },
           angular.identity
         );
-      },
-
-      search: function search (query) {
-        var cheatsheets = new CheatsheetCollection();
-
-        return $http.get('/cheatsheets?s=' + query).then(
-          function (resp) {
-            cheatsheets.add(resp.data);
-            return cheatsheets;
-          },
-          angular.identity
-        );
       }
     };
   }

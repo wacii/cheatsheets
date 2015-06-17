@@ -63,24 +63,4 @@ describe('Cheatsheet factory', function () {
       expect(value.save).not.toBeUndefined();
     });
   });
-
-  describe('#search()', function () {
-    it('returns a promise resolving to a cheatsheet collection', function () {
-      $httpBackend.expectGET('/cheatsheets?s=asdf')
-
-      var xhr = factory.search('asdf');
-      var value;
-      xhr.then(function (data) {
-        value = data;
-      });
-
-      $httpBackend.flush();
-      expect(value).not.toEqual(
-        jasmine.arrayContaining([new CheatsheetModel({ id: 1, name: 'asdf' })])
-      );
-      expect(value).toEqual(
-        jasmine.arrayContaining([new CheatsheetModel({ id: 2, name: 'qwer' })])
-      );
-    });
-  })
 });
