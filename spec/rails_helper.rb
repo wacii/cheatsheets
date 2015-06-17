@@ -25,4 +25,5 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: [:controller, :view]
   config.include Warden::Test::Helpers, type: :feature
+  config.include FactoryGirl::Syntax::Methods
 end
