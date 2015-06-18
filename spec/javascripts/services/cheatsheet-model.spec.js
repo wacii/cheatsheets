@@ -33,6 +33,7 @@ describe('CheatsheetModel', function () {
   describe('#save()', function () {
     describe('when persisted', function () {
       it('sends a patch request', function () {
+        model.title = 'asdf'
         model.id = 1;
         model.save()
         expect($http.patch).toHaveBeenCalledWith(
@@ -44,12 +45,24 @@ describe('CheatsheetModel', function () {
 
     describe('when new', function () {
       it('sends a post request', function () {
+        model.title = 'asdf'
         model.save()
         expect($http.post).toHaveBeenCalledWith(
           '/cheatsheets',
           jasmine.any(Object)
         );
       });
+    });
+
+    it('escapes when title not set', function () {
+      model.title = '';
+      model.save();
+
+      model.title = undefined;
+      model.save();
+
+      expect($http.post).not.toHaveBeenCalled()
+      expect($http.patch).not.toHaveBeenCalled()
     });
   });
 

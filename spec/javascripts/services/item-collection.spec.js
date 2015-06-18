@@ -58,13 +58,13 @@ describe('ItemCollection', function () {
       });
 
       it('saves created object', function () {
-        collection.create({ name: 'asdf' });
+        collection.create({ name: 'asdf', description: 'asdf' });
         expect($http.post).toHaveBeenCalled();
       });
 
       it('pushes object', function () {
         spyOn(collection, 'push');
-        collection.create({ name: 'asdf' });
+        collection.create({ name: 'asdf', description: 'asdf' });
         expect(collection.push).toHaveBeenCalled();
       });
     });

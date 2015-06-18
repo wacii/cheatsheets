@@ -37,6 +37,7 @@ describe('ItemModel', function () {
   describe('#save()', function () {
     describe('when persisted', function () {
       it('sends a patch request', function () {
+        model.set({ name: 'asdf', description: 'asdf' });
         model.id = 1;
         model.save()
         expect($http.patch).toHaveBeenCalledWith(
@@ -48,10 +49,15 @@ describe('ItemModel', function () {
 
     describe('when new', function () {
       it('throws an error without cheatsheet id', function () {
-        expect(model.save).toThrow()
+        var fn = function () {
+          model.set({ name: 'asdf', description: 'asdf' });
+          model.save()
+        }
+        expect(fn).toThrow()
       });
 
       it('sends a post request', function () {
+        model.set({ name: 'asdf', description: 'asdf' });
         model.cheatsheetId = 1
         model.save()
         expect($http.post).toHaveBeenCalledWith(
@@ -59,6 +65,19 @@ describe('ItemModel', function () {
           jasmine.any(Object)
         );
       });
+    });
+
+    it('escapes when name or description not set', function () {
+      model.name = 'asdf';
+      model.description = undefined;
+      model.save();
+
+      model.name = '';
+      model.description = 'asdf';
+      model.save()
+
+      expect($http.post).not.toHaveBeenCalled()
+      expect($http.patch).not.toHaveBeenCalled()
     });
   });
 

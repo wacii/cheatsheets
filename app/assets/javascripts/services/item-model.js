@@ -18,6 +18,8 @@
     });
 
     ItemModel.prototype.save = function save () {
+      if (!this.name || !this.description) return;
+
       if (this.id !== undefined)
         return $http.patch('/items/' + this.id, { item: this.attributes });
 

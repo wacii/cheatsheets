@@ -4,18 +4,18 @@
     %i.purple.checkmark.icon
 
 .ui.form(ng-form='cheatsheetForm')
-  .field
+  .field(ng-class='{ error: cheatsheetForm.title.$invalid }')
     %label Title
-    %input(ng-model='cheatsheet.title' ng-blur='cheatsheet.save()')
+    %input(ng-model='cheatsheet.title' name='title' ng-blur='cheatsheet.save()' required)
 
   %h4.ui.dividing.header Items
 
-  .two.fields(ng-repeat='item in cheatsheet.items')
-    .field
-      %input(ng-model='item.name' ng-blur='item.save()' required)
-    .field
+  .two.fields(ng-form='itemForm' ng-repeat='item in cheatsheet.items')
+    .field(ng-class='{ error: itemForm.name.$invalid }')
+      %input(ng-model='item.name' name='name' ng-blur='item.save()' required)
+    .field(ng-class='{ error: itemForm.description.$invalid }')
       .ui.action.input
-        %input(ng-model='item.description' ng-blur='item.save()' required)
+        %input(ng-model='item.description' name='description' ng-blur='item.save()' required)
         %button.ui.icon.button(ng-click='cheatsheet.items.remove(item)')
           %i.remove.icon
 

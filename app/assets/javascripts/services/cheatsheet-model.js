@@ -18,6 +18,8 @@
     });
 
     CheatsheetModel.prototype.save = function save () {
+      if (!this.title) return;
+
       if (this.id === undefined) {
         $http.post('/cheatsheets', { cheatsheet: this.attributes });
       } else {

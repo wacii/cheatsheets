@@ -23,7 +23,12 @@ function config ($routeProvider) {
     })
     .when('/edit/:id', {
       templateUrl: 'cheatsheet.edit.html',
-      controller: 'CheatSheetEditCtrl'
+      controller: 'CheatSheetEditCtrl',
+      resolve: {
+        cheatsheet: function ($route, Cheatsheet) {
+          return Cheatsheet.find($route.current.params.id);
+        }
+      }
     })
     .otherwise('/');
 }
