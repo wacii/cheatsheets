@@ -17,25 +17,8 @@
     .container
       .ui.hidden.divider
       .ui.secondary.menu
-        = link_to "Sheets", root_path, class: 'item'
-        %a.item.launchModalCreate Create
+        %a.ui.item(href='#/') Cheatsheets
         .right.menu
-          %a.item Settings
-          %a.ui.item Logout
+          %a.ui.item(href='/users/sign_out') Logout
       .ui.hidden.divider
       = yield
-
-  / create modal
-  .ui.small.modal.modalCreate
-    .content
-      .description
-        .ui.header Name cheat sheet
-        .ui.fluid.input
-          %input{:type => "text"}
-        .ui.hidden.divider
-        %a.ui.basic.button{:href => "#/show/1"}
-          Create
-
-:javascript
-  // create modal
-  $('.modalCreate').modal('attach events', '.launchModalCreate', 'show');

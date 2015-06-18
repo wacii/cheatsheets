@@ -21,5 +21,9 @@ function config ($routeProvider) {
       controller: 'CheatSheetCtrl',
       controllerAs: 'Ctrl'
     })
+    .when('/edit/:id', {
+      templateUrl: 'cheatsheet.edit.html',
+      controller: 'CheatSheetEditCtrl'
+    })
     .otherwise('/');
 }

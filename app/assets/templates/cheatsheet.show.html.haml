@@ -1,140 +1,19 @@
-%input(ng-model='query' type='text' placeholder='Search')
+%h3.ui.dividing.header
+  %span(ng-bind='cheatsheet.title')
+  %a(ng-href='#/edit/{{cheatsheet.id}}')
+    %i.tiny.purple.write.icon
 
-%h3(ng-hide='options.editorEnabled')
-  %span(ng-bind="cheatsheet.title")
-  %button.btn.btn-link.btn-xs.pull-right(ng-click='enableEditor()') Edit
-  %button.btn.btn-link.btn-xs.pull-right(ng-click='cheatsheets.remove(cheatsheet)') Delete
-%form(name="editCheatSheet" ng-show='options.editorEnabled')
-  %input.form-control(type='text' name='edit-cheatsheet-text' ng-model='cheatsheet.title' required)
-  %button.btn.btn-link.btn-xs(ng-click='editCheatSheet2(cheatsheet)') Save
-  %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
-%form(name='newItemForm')
-  .input-group
-    %input(type='text' ng-model='newItem.name' name='name' placeholder="Name" required)
-    %input(type='text' ng-model='newItem.description' name='description' placeholder="Description" required)
-    %span.input-group-btn
-      %button.btn.btn-primary(ng-click='addItem(newItem)' ng-disabled='!cheatsheetLoaded' ng-disabled='newItemForm.$invalid') Add
-%ul(ng-repeat="item in cheatsheet.items  | filter:query")
-  %li(ng-controller='CheatSheetEditCtrl')
-    %div(ng-hide='options.editorEnabled')
-      %span(ng-bind='item.name')
-      %span(ng-bind='item.description')
-      %button(ng-click='enableEditor()' id='edit-item-link') Edit
-      %button(ng-click='cheatsheet.items.remove(item)' id='delete-item-link') Delete
-    %form(ng-show='options.editorEnabled')
-      %input.form-control(type='text' name='title' ng-model='item.name' required)
-      %input.form-control(type='text' name='description' ng-model='item.description' required)
-      %button.btn.btn-link.btn-xs(ng-click='editItem()') Save
-      %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
+.ui.icon.input
+  %input(placeholder='Search...' ng-model='query')
+  %i.search.icon
 
-%h2.ui.center.aligned.header
-  .ui.floating.dropdown
-    {{cheatsheet.title}}
-    .menu
-      .item Edit cheat sheet title
-      .item.removeSection Delete cheat sheet
-  .ui.hidden.divider
-  .ui.basic.button Favorite
 .ui.hidden.divider
-.sheet
-  .sheetSizer
-  .gutterSizer
-  .section
-    %table.ui.unstackable.celled.table
-      %thead
-        %th{:colspan => "2"} Name of section
-        %th{:width => "25px"}
-          .ui.icon.top.left.pointing.dropdown
-            %i.ellipsis.horizontal.icon
-            .menu
-              .item Edit section title
-              .item.removeSection Delete section
-      %tbody
-        - 4.times do
-          %tr
-            %td Copying text
-            %td Ctrl + C
-            %td{:width => "25px"}
-              .ui.icon.top.left.pointing.dropdown
-                %i.ellipsis.horizontal.icon
-                .menu
-                  .item Edit row
-                  .item Delete row
-        %tr.addItemRow.h-hidden
-          %td
-            .ui.input.fluid
-              %input{:autofocus => "true", :type => "text"}
-          %td
-            .ui.input.fluid
-              %input{:type => "text"}
-          %td{:width => "25px"}
-        %tr
-          %td{:colspan => "3"}
-            .ui.mini.button.addItem Add
-            .removeItem.h-hidden
-              .ui.mini.basic.button.addItem Cancel
-.ui.basic.button.addSection Add section
-.ui.hidden.divider
-
-:javascript
-  // SHEET
-  $(document).ready( function() {
-    $('.sheet').masonry({
-      itemSelector: '.section',
-      columnWidth: '.sheetSizer',
-      percentPosition: true,
-      gutter: '.gutterSizer'
-    });
-
-  });
-
-  // add section
-  $( function() {
-    var $grid = $('.sheet').masonry({
-      columnWidth: '.sheetSizer',
-      itemSelector: '.section'
-    });
-
-    $('.addSection').on( 'click', function() {
-      var elems = [ getItemElement()];
-      // make jQuery object
-      var $elems = $( elems );
-      $grid.append( $elems ).masonry( 'appended', $elems );
-    });
-  });
-
-  // create
-  function getItemElement() {
-    var elem = document.createElement('div');
-    var widthClass = 'section';
-    var heightClass = 'sectionEx';
-    elem.className = 'section ' + widthClass + ' ' + heightClass;
-    return elem;
-  }
-
-  // SECTION
-  $('.addItem').on('click', function(){
-    $('.addItemRow').removeClass('h-hidden');
-    $('.addItemRow').addClass('h-showRow');
-    $('.removeItem').addClass('h-show');
-  });
-  $('.removeItem').on('click', function(){
-    $('.addItemRow').removeClass('h-showRow');
-    $('.addItemRow').addClass('h-hidden');
-    $('.removeItem').removeClass('h-show');
-    $('.removeItem').addClass('h-hidden');
-  });
-
-  // fix layout on resize
-  var $grid = $('.sheet').masonry({
-    columnWidth: '.sheetSizer'
-  });
-  $grid.on( 'click', '.addItem', function() {
-    $grid.masonry('layout');
-  });
-  $grid.on( 'click', '.removeItem', function() {
-    $grid.masonry('layout');
-  });
-
-  // dropdown initiate
-  $('.dropdown').dropdown({action: 'select'});
+%table.ui.unstackable.striped.table
+  %thead
+    %tr
+      %th Name
+      %th Description
+  %tbody
+    %tr(ng-repeat='item in cheatsheet.items | filter:query')
+      %td(ng-bind='item.name')
+      %td(ng-bind='item.description')

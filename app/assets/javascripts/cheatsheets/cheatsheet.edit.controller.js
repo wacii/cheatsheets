@@ -1,30 +1,17 @@
 angular
   .module('app.cheatsheets')
-  .controller('CheatSheetEditCtrl', ['$scope', '$filter', '$routeParams', 'Cheatsheet', function($scope, $filter, $routeParams, Cheatsheet)
-{
-  cheatsheet = {};
+  .controller('CheatSheetEditCtrl', ['$scope', '$routeParams', 'Cheatsheet', function($scope, $routeParams, Cheatsheet) {
+    $scope.cheatsheet = {};
+    $scope.newItem = {};
+    $scope.addItem = function createItem() {
+      if (!$scope.newItem.name || !$scope.newItem.description) return;
+      $scope.cheatsheet.items.create($scope.newItem);
+      $scope.newItem = {};
+    };
 
-  Cheatsheet.find($routeParams.id).then(function (data) {
-    $scope.cheatsheet = data;
-    $scope.cheatsheetLoaded = true;
-  });
-
-  //console.log(cheatsheet);
-
-  item = { cheatsheet_id: $routeParams.id, name: '', description: '' };
-
-  $scope.editItem = function(item) {
-    editItem = { cheatsheet_id: $routeParams.id, name: item.name, description: item.description };
-    item.update(editItem);
-    $scope.options.editorEnabled = false;
-  };
-
-  $scope.options = { editorEnabled: false };
-  $scope.enableEditor = function() {
-    $scope.options.editorEnabled = true;
-  };
-  $scope.disableEditor = function() {
-    $scope.options.editorEnabled = false;
-  };
-
-}]);
+    Cheatsheet.find($routeParams.id).then(function (data) {
+      $scope.cheatsheet = data;
+      $scope.cheatsheetLoaded = true;
+    });
+  }
+]);

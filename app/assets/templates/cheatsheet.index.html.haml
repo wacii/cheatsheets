@@ -1,50 +1,19 @@
-%h3 CheatSheets
-.form-inline(name='newCheatSheetForm')
-  %input.form-control(ng-model='query' type='text' placeholder='Search')
-  %form.form(name='newCheatSheetForm')
-    .input-group
-      %input.form-control(type='text'
-                          ng-model='title'
-                          name='title'
-                          placeholder="Add a new cheatsheet?"
-                          required)
-      %span.input-group-btn
-        %button.btn.btn-primary(ng-click='addCheatSheet()' ng-disabled='newCheatSheetForm.$invalid') Add
-%ul.list-group
-  %div(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
-    %li.list-group-item(ng-controller='CheatSheetsEditCtrl')
-      %h5(ng-hide='options.editorEnabled')
-        %a{:href => "#/show/{{cheatsheet.id}}"}
-          %span(ng-bind="cheatsheet.title")
-        %button.btn.btn-link.btn-xs.pull-right(ng-click='enableEditor()' id='edit-cheatsheet-link') Edit
-        %button.btn.btn-link.btn-xs.pull-right(ng-click='cheatsheets.remove(cheatsheet)') Delete
-      %form(ng-show='options.editorEnabled')
-        %input.form-control(type='text' name='edit-cheatsheet-text' ng-model='cheatsheet.title' required)
-        %button.btn.btn-link.btn-xs(ng-click='editCheatSheet()') Save
-        %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
+%h3.ui.dividing.header Your Cheatsheets
 
-%h4.ui.dividing.header Your sheets
+
+.ui.form
+  .two.fields
+    .field.ui.icon.input
+      %input(placeholder='Search...' ng-model='query')
+        %i.search.icon
+    .field.ui.action.input(ng-form='newCheatSheetForm')
+      %input(ng-model='title' placeholder='Add a new cheatsheet?' required)
+        %button.ui.button(ng-click='addCheatSheet()' ng-disabled='newCheatSheetForm.$invalid') Add
+
 .ui.very.relaxed.selection.list
-  - 3.times do
-    .item
-      .right.floated.compact.ui.basic.button Unfavorite
-      %a{:href => "#/show/1"}
-        .content
-          .header Helen
-          .description 50 cheats
-%h4.ui.dividing.header Find new sheets
-.ui.input
-  %input{:placeholder => "Search...", :type => "text"}
-.ui.very.relaxed.selection.list
-  - 3.times do
-    .item
-      %a{:href => "#/show/{{cheatsheet.id}}"}
-        .content
-          .header Helen
-          .description 50 cheats
-.ui.basic.compact.buttons
-  .ui.button 1
-  .ui.button 2
-  .ui.button 3
-  .ui.button 4
-  .ui.button 10
+  .item(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
+    .right.floated.compact.ui.basic.button Delete
+    %a(ng-href='#/show/{{cheatsheet.id}}')
+      .content
+        .header(ng-bind='cheatsheet.title')
+        .description(ng-bind='cheatsheet.items.length')

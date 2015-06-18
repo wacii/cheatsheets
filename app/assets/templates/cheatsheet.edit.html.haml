@@ -1,0 +1,31 @@
+%h3.ui.dividing.header
+  Edit Cheatsheet
+  %a(ng-href='#/show/{{cheatsheet.id}}')
+    %i.purple.checkmark.icon
+
+.ui.form(ng-form='cheatsheetForm')
+  .field
+    %label Title
+    %input(ng-model='cheatsheet.title' ng-blur='cheatsheet.save()')
+
+  %h4.ui.dividing.header Items
+
+  .two.fields(ng-repeat='item in cheatsheet.items')
+    .field
+      %input(ng-model='item.name' ng-blur='item.save()' required)
+    .field
+      .ui.action.input
+        %input(ng-model='item.description' ng-blur='item.save()' required)
+        %button.ui.icon.button(ng-click='cheatsheet.items.remove(item)')
+          %i.remove.icon
+
+.ui.divider
+
+.ui.form(ng-form='newItemForm')
+  .two.fields
+    .field
+      %input(ng-model='newItem.name' placeholder='name' required)
+    .field
+      .ui.action.input
+        %input(ng-model='newItem.description' placeholder='description' required)
+        %button.ui.button(ng-disabled='newItemForm.$invalid' ng-click='addItem()') Add
