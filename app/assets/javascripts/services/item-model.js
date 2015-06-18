@@ -22,7 +22,7 @@
       if (this.id === undefined) {
         $http.post(url + '/items', { item: this.attributes });
       } else {
-        $http.patch(url + '/items/' + this.id, { item: this.attributes });
+        $http.patch('/items/' + this.id, { item: this.attributes });
       }
     };
 
