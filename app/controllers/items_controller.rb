@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  load_and_authorize_resource :resource, only: [:index, :create]
-  load_and_authorize_resource shallow: true
+  load_and_authorize_resource :cheatsheet, only: [:index, :create]
+  load_and_authorize_resource shallow: true, through: :cheatsheet
 
   def index
     render json: @items
