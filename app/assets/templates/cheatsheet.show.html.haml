@@ -1,28 +1,27 @@
 %input(ng-model='query' type='text' placeholder='Search')
 
-%h3 {{cheatsheet.title}}
+%h3(ng-hide='options.editorEnabled')
+  %span(ng-bind="cheatsheet.title")
+  %button.btn.btn-link.btn-xs.pull-right(ng-click='enableEditor()') Edit
+  %button.btn.btn-link.btn-xs.pull-right(ng-click='cheatsheets.remove(cheatsheet)') Delete
+%form(name="editCheatSheet" ng-show='options.editorEnabled')
+  %input.form-control(type='text' name='edit-cheatsheet-text' ng-model='cheatsheet.title' required)
+  %button.btn.btn-link.btn-xs(ng-click='editCheatSheet2(cheatsheet)') Save
+  %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
 %form(name='newItemForm')
   .input-group
-    %input(type='text'
-           ng-model='name'
-           name='name'
-           placeholder="Name"
-           required)
-    %input(type='text'
-           ng-model='description'
-           name='description'
-           placeholder="Description"
-           required)
+    %input(type='text' ng-model='newItem.name' name='name' placeholder="Name" required)
+    %input(type='text' ng-model='newItem.description' name='description' placeholder="Description" required)
     %span.input-group-btn
-      %button.btn.btn-primary(ng-click='addItem()') Add
-%ul(ng-repeat="item in cheatsheet.items")
-  %li
+      %button.btn.btn-primary(ng-click='addItem(newItem)' ng-disabled='!cheatsheetLoaded' ng-disabled='newItemForm.$invalid') Add
+%ul(ng-repeat="item in cheatsheet.items  | filter:query")
+  %li(ng-controller='CheatSheetEditCtrl')
     %div(ng-hide='options.editorEnabled')
       %span(ng-bind='item.name')
       %span(ng-bind='item.description')
       %button(ng-click='enableEditor()' id='edit-item-link') Edit
-      %button(ng-click='deleteItem()' id='delete-item-link') Delete
-    %ng-form(name="editItem" ng-show='options.editorEnabled')
+      %button(ng-click='cheatsheet.items.remove(item)' id='delete-item-link') Delete
+    %form(ng-show='options.editorEnabled')
       %input.form-control(type='text' name='title' ng-model='item.name' required)
       %input.form-control(type='text' name='description' ng-model='item.description' required)
       %button.btn.btn-link.btn-xs(ng-click='editItem()') Save
