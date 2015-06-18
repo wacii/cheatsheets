@@ -1,5 +1,5 @@
 angular
-  .module('app')
+  .module('app.cheatsheets')
   .config(config);
   // .config('cheatsheets.config');
 
