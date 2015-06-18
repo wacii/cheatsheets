@@ -11,7 +11,7 @@
       %span.input-group-btn
         %button.btn.btn-primary(ng-click='addCheatSheet()' ng-disabled='newCheatSheetForm.$invalid') Add
 %ul.list-group
-  %div(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
+  %div(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query" )
     %li.list-group-item(ng-controller='CheatSheetsEditCtrl')
       %h5(ng-hide='options.editorEnabled')
         %a{:href => "#/show/{{cheatsheet.id}}"}

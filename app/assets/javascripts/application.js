@@ -5,5 +5,6 @@
 //= require angular-rails-templates
 //= require marked.min
 //= require angular-marked.min
+//= require ng-sortable.min
 //= require_tree .
 //= require_tree ../templates
