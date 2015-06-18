@@ -7,7 +7,8 @@ describe Cheatsheet, type: :model do
     expect(build(:cheatsheet)).to be_valid
   end
 
-  it { should have_many(:items)}
+  it { should belong_to(:user) }
+  it { should have_many(:items) }
 
   it { should validate_presence_of(:title) }
 

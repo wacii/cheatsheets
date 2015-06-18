@@ -3,5 +3,7 @@
 //= require angular
 //= require angular-route
 //= require angular-rails-templates
+//= require marked.min
+//= require angular-marked.min
 //= require_tree .
 //= require_tree ../templates

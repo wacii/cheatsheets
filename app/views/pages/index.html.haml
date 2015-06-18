@@ -1,8 +1,3 @@
-- content_for :head do
-  - root_url = 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3'
-  = stylesheet_link_tag "#{root_url}/semantic.min.css"
-  = javascript_include_tag "#{root_url}/semantic.min.js"
-
 - if user_signed_in?
   = link_to('Logout', destroy_user_session_path, :method => :delete)
 - else

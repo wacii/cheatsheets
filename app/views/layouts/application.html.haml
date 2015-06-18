@@ -3,8 +3,14 @@
   %head
     %meta(content='text/html; charset=UTF-8' http-equiv='Content-Type')
     %title Cheatsheets
+    - root_url = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6'
+    = stylesheet_link_tag "#{root_url}/styles/default.min.css"
+    = javascript_include_tag "#{root_url}/highlight.min.js"
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+    - root_url = 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3'
+    = stylesheet_link_tag "#{root_url}/semantic.min.css"
+    = javascript_include_tag "#{root_url}/semantic.min.js"
     = csrf_meta_tags
     = yield :head
   %body

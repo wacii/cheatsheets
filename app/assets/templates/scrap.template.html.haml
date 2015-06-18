@@ -28,7 +28,7 @@
 %ul
   %li(ng-repeat='item in vm.cheatsheet.items')
     %span(ng-bind='item.name')
-    %span(ng-bind='item.description')
+    %span(marked='item.description')
     %button(ng-click='vm.cheatsheet.items.remove(item)') X
 
 %input(ng-model='vm.newItem.name')
