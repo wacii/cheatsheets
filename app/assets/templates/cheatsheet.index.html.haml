@@ -1,6 +1,5 @@
 %h3.ui.dividing.header Your Cheatsheets
 
-
 .ui.form
   .two.fields
     .field.ui.icon.input
@@ -11,9 +10,13 @@
         %button.ui.button(ng-click='addCheatSheet()' ng-disabled='newCheatSheetForm.$invalid') Add
 
 .ui.very.relaxed.selection.list
-  .item(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
+  .item(ng-repeat="cheatsheet in filtered = (cheatsheets | orderBy: 'title' | filter:query)")
     .right.floated.compact.ui.basic.button Delete
     %a(ng-href='#/show/{{cheatsheet.id}}')
       .content
         .header(ng-bind='cheatsheet.title')
         .description(ng-bind='cheatsheet.items.length')
+    %table.ui.basic.table(ng-if='filtered.length === 1')
+      %tr(ng-repeat='item in filtered[0].items | filter:query | limitTo:10')
+        %td(ng-bind='item.name')
+        %td(ng-bind='item.description')
