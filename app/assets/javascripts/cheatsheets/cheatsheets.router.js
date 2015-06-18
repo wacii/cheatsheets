@@ -1,7 +1,6 @@
 angular
   .module('app.cheatsheets')
   .config(config);
-  // .config('cheatsheets.config');
 
 config.$inject = ['$routeProvider'];
 
