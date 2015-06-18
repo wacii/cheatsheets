@@ -27,3 +27,115 @@
       %input.form-control(type='text' name='description' ng-model='item.description' required)
       %button.btn.btn-link.btn-xs(ng-click='editItem()') Save
       %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
+
+%h2.ui.center.aligned.header
+  .ui.floating.dropdown
+    {{cheatsheet.title}}
+    .menu
+      .item Edit cheat sheet title
+      .item.removeSection Delete cheat sheet
+  .ui.hidden.divider
+  .ui.basic.button Favorite
+.ui.hidden.divider
+.sheet
+  .sheetSizer
+  .gutterSizer
+  .section
+    %table.ui.unstackable.celled.table
+      %thead
+        %th{:colspan => "2"} Name of section
+        %th{:width => "25px"}
+          .ui.icon.top.left.pointing.dropdown
+            %i.ellipsis.horizontal.icon
+            .menu
+              .item Edit section title
+              .item.removeSection Delete section
+      %tbody
+        - 4.times do
+          %tr
+            %td Copying text
+            %td Ctrl + C
+            %td{:width => "25px"}
+              .ui.icon.top.left.pointing.dropdown
+                %i.ellipsis.horizontal.icon
+                .menu
+                  .item Edit row
+                  .item Delete row
+        %tr.addItemRow.h-hidden
+          %td
+            .ui.input.fluid
+              %input{:autofocus => "true", :type => "text"}
+          %td
+            .ui.input.fluid
+              %input{:type => "text"}
+          %td{:width => "25px"}
+        %tr
+          %td{:colspan => "3"}
+            .ui.mini.button.addItem Add
+            .removeItem.h-hidden
+              .ui.mini.basic.button.addItem Cancel
+.ui.basic.button.addSection Add section
+.ui.hidden.divider
+
+:javascript
+  // SHEET
+  $(document).ready( function() {
+    $('.sheet').masonry({
+      itemSelector: '.section',
+      columnWidth: '.sheetSizer',
+      percentPosition: true,
+      gutter: '.gutterSizer'
+    });
+
+  });
+
+  // add section
+  $( function() {
+    var $grid = $('.sheet').masonry({
+      columnWidth: '.sheetSizer',
+      itemSelector: '.section'
+    });
+
+    $('.addSection').on( 'click', function() {
+      var elems = [ getItemElement()];
+      // make jQuery object
+      var $elems = $( elems );
+      $grid.append( $elems ).masonry( 'appended', $elems );
+    });
+  });
+
+  // create
+  function getItemElement() {
+    var elem = document.createElement('div');
+    var widthClass = 'section';
+    var heightClass = 'sectionEx';
+    elem.className = 'section ' + widthClass + ' ' + heightClass;
+    return elem;
+  }
+
+  // SECTION
+  $('.addItem').on('click', function(){
+    $('.addItemRow').removeClass('h-hidden');
+    $('.addItemRow').addClass('h-showRow');
+    $('.removeItem').addClass('h-show');
+  });
+  $('.removeItem').on('click', function(){
+    $('.addItemRow').removeClass('h-showRow');
+    $('.addItemRow').addClass('h-hidden');
+    $('.removeItem').removeClass('h-show');
+    $('.removeItem').addClass('h-hidden');
+  });
+
+  // fix layout on resize
+  var $grid = $('.sheet').masonry({
+    columnWidth: '.sheetSizer'
+  });
+  $grid.on( 'click', '.addItem', function() {
+    $grid.masonry('layout');
+  });
+  $grid.on( 'click', '.removeItem', function() {
+    $grid.masonry('layout');
+  });
+
+  // dropdown initiate
+  $('.dropdown').dropdown({action: 'select'});
