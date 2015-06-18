@@ -3,8 +3,17 @@
 - else
   = link_to('Login', new_user_session_path)
 
-%p= notice
-%p= alert
+- if notice.present?
+  .ui.yellow.message
+    %i.close.icon
+    %p= notice
+- if alert.present?
+  .ui.orange.message
+    %i.close.icon
+    %p= alert
 
-%div(ng-app='app')
+%div(ng-app='app' ng-controller='CoreController as core')
+  .ui.red.message(ng-if='core.message' ng-cloak)
+    %i.close.icon
+    %p(ng-bind='core.message')
   %div(ng-view)
