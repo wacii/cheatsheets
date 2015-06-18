@@ -14,4 +14,28 @@
     = csrf_meta_tags
     = yield :head
   %body
-    = yield
+    .container
+      .ui.hidden.divider
+      .ui.secondary.menu
+        = link_to "Sheets", root_path, class: 'item'
+        %a.item.launchModalCreate Create
+        .right.menu
+          %a.item Settings
+          %a.ui.item Logout
+      .ui.hidden.divider
+      = yield
+
+  / create modal
+  .ui.small.modal.modalCreate
+    .content
+      .description
+        .ui.header Name cheat sheet
+        .ui.fluid.input
+          %input{:type => "text"}
+        .ui.hidden.divider
+        %a.ui.basic.button{:href => "#/show/1"}
+          Create
+
+:javascript
+  // create modal
+  $('.modalCreate').modal('attach events', '.launchModalCreate', 'show');

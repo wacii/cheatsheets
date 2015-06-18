@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fff;
+}
+
+/* SHEET ------------------------------------------------------- */
+.sheet,
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sheet:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.sheetSizer,
+.section {
+  width: 49%;
+}
+
+.gutterSizer {
+  width: 1%
+}
+
+.section {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.sectionEx { /* this is an example of how the add section works REMOVE LATER  */
+  border: 1px solid #ccc;
+  height: 120px;
+}
+
+@media (max-width: 768px) {
+  .sheetSizer,
+  .section,
+  .container {
+    width: 100%;
+  }
+}
+
+/* HELPERS ----------------------------------------------------- */
+.h-hidden {
+  display: none;
+}
+.h-showRow {
+  display: table-row;
+}
+.h-show {
+  display: inline-block;
+}
+.h-left {
+  float: left !important;
+}
+.h-right {
+  float: right !important;
+}

@@ -28,3 +28,29 @@
         //.glyphicon.glyphicon-trash.pull-right
         //%span.glyphicon.glyphicon-edit
         //%span.glyphicon.glyphicon-trash
+
+%h4.ui.dividing.header Your sheets
+.ui.very.relaxed.selection.list
+  - 3.times do
+    .item
+      .right.floated.compact.ui.basic.button Unfavorite
+      %a{:href => "#/show/1"}
+        .content
+          .header Helen
+          .description 50 cheats
+%h4.ui.dividing.header Find new sheets
+.ui.input
+  %input{:placeholder => "Search...", :type => "text"}
+.ui.very.relaxed.selection.list
+  - 3.times do
+    .item
+      %a{:href => "#/show/{{cheatsheet.id}}"}
+        .content
+          .header Helen
+          .description 50 cheats
+.ui.basic.compact.buttons
+  .ui.button 1
+  .ui.button 2
+  .ui.button 3
+  .ui.button 4
+  .ui.button 10
