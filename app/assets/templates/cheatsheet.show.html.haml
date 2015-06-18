@@ -14,7 +14,7 @@
     %input(type='text' ng-model='newItem.description' name='description' placeholder="Description" required)
     %span.input-group-btn
       %button.btn.btn-primary(ng-click='addItem(newItem)' ng-disabled='!cheatsheetLoaded' ng-disabled='newItemForm.$invalid') Add
-%ul(ng-repeat="item in cheatsheet.items")
+%ul(ng-repeat="item in cheatsheet.items  | filter:query")
   %li(ng-controller='CheatSheetEditCtrl')
     %div(ng-hide='options.editorEnabled')
       %span(ng-bind='item.name')
