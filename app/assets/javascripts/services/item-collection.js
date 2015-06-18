@@ -6,13 +6,12 @@
   factory.$inject = ['$http', 'ItemModel'];
 
   function factory ($http, ItemModel) {
-    function ItemCollection (models, cheatsheet) {
+    function ItemCollection (models) {
       var array = [];
 
       array.add = this.add;
       array.create = this.create;
       array.remove = this.remove;
-      array.cheatsheet = cheatsheet;
 
       array.add(models);
       return array;
@@ -21,15 +20,19 @@
     ItemCollection.prototype.add = function add (models) {
       if (models === undefined) return this;
 
-      for (var i = 0; i < models.length; i++)
-        this.push(new ItemModel(models[i]));
+      for (var i = 0; i < models.length; i++) {
+        var item = new ItemModel(models[i]);
+        item.cheatsheetId = this.cheatsheetId;
+        this.push(item);
+      }
     }
 
     ItemCollection.prototype.create = function create (attributes) {
-      if (this.cheatsheet === undefined || this.cheatsheet.id === undefined)
+      if (this.cheatsheetId === undefined)
         throw new Error('parent must be persisted')
       var item = new ItemModel(attributes);
-      item.save(this.cheatsheet.id);
+      item.cheatsheetId = this.cheatsheetId
+      item.save();
       this.push(item);
       return item;
     };

@@ -1,31 +1,35 @@
 //= require spec_helper
 
-describe('CheatsheetModel', function () {
+describe('ItemModel', function () {
   beforeEach(angular.mock.module('app.services'))
 
   beforeEach(function () {
     angular.mock.module({
-      $http: jasmine.createSpyObj('$http', ['patch', 'post', 'delete']),
-      ItemCollection: jasmine.createSpy('ItemCollection', [])
+      $http: jasmine.createSpyObj('$http', ['patch', 'post', 'delete'])
     });
   });
 
   var $http
-  var ItemCollection;
   var model;
   beforeEach(inject(function ($injector) {
     $http = $injector.get('$http');
-    ItemCollection = $injector.get('ItemCollection');
-
-    var CheatsheetModel = $injector.get('CheatsheetModel');
-    model = new CheatsheetModel;
+    var ItemModel = $injector.get('ItemModel');
+    model = new ItemModel;
   }))
 
   describe('#attributes', function () {
     it('gets models attributes', function () {
-      model.title = 'asdf';
+      model.name = 'asdf';
+      model.description = 'qwer'
+      model.garbage = 'zxcv'
       expect(model.attributes).toEqual(jasmine.objectContaining({
-        title: 'asdf'
+        name: 'asdf'
+      }));
+      expect(model.attributes).toEqual(jasmine.objectContaining({
+        description: 'qwer'
+      }));
+      expect(model.attributes).not.toEqual(jasmine.objectContaining({
+        garbage: 'zxcv'
       }));
     });
   });
@@ -36,17 +40,22 @@ describe('CheatsheetModel', function () {
         model.id = 1;
         model.save()
         expect($http.patch).toHaveBeenCalledWith(
-          '/cheatsheets/1',
+          '/items/1',
           jasmine.any(Object)
         );
       });
     });
 
     describe('when new', function () {
+      it('throws an error without cheatsheet id', function () {
+        expect(model.save).toThrow()
+      });
+
       it('sends a post request', function () {
+        model.cheatsheetId = 1
         model.save()
         expect($http.post).toHaveBeenCalledWith(
-          '/cheatsheets',
+          '/cheatsheets/1/items',
           jasmine.any(Object)
         );
       });
@@ -69,29 +78,15 @@ describe('CheatsheetModel', function () {
     it('sends a delete request', function () {
       model.id = 1
       model.destroy()
-      expect($http.delete).toHaveBeenCalledWith('/cheatsheets/1');
+      expect($http.delete).toHaveBeenCalledWith('/items/1');
     });
   });
 
   describe('#set()', function () {
     it('sets attributes', function () {
-      expect(model.title).toEqual('');
-      model.set({ title: 'asdf' })
-      expect(model.title).toEqual('asdf');
-    });
-
-    it('wraps items in ItemCollection', function () {
-      var items = [];
-      ItemCollection.and.returnValue(items);
-      model.set({ items: [{ name: 'asdf' }] });
-      expect(model.items).toEqual(items);
-    });
-
-    it('sets cheatsheetId on ItemCollection', function () {
-      var items = [];
-      ItemCollection.and.returnValue(items);
-      model.set();
-      expect(model.items.cheatsheetId).toEqual(model.id);
+      expect(model.name).toEqual('');
+      model.set({ name: 'asdf' })
+      expect(model.name).toEqual('asdf');
     });
 
     it('does not save changes', function () {

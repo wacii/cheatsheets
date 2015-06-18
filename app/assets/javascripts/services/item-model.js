@@ -17,13 +17,14 @@
       }
     });
 
-    ItemModel.prototype.save = function save (cheatsheetId) {
-      var url = '/cheatsheets/' + cheatsheetId;
-      if (this.id === undefined) {
-        $http.post(url + '/items', { item: this.attributes });
-      } else {
-        $http.patch(url + '/items/' + this.id, { item: this.attributes });
-      }
+    ItemModel.prototype.save = function save () {
+      if (this.id !== undefined)
+        return $http.patch('/items/' + this.id, { item: this.attributes });
+
+      if (this.cheatsheetId === undefined)
+        throw new Error('parent must be persisted');
+      var url = '/cheatsheets/' + this.cheatsheetId;
+      return $http.post(url + '/items', { item: this.attributes });
     };
 
     ItemModel.prototype.update = function update (attributes) {

@@ -39,7 +39,8 @@
     CheatsheetModel.prototype.set = function set (attributes) {
       angular.extend(this, attributes);
       var _items = this.items;
-      this.items = new ItemCollection(_items, this);
+      this.items = new ItemCollection(_items);
+      this.items.cheatsheetId = this.id;
     };
 
     return CheatsheetModel;
