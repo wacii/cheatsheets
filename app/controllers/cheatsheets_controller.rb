@@ -1,16 +1,15 @@
 class CheatsheetsController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @cheatsheets = Cheatsheet.all
     render json: @cheatsheets
   end
 
   def show
-    @cheatsheet = Cheatsheet.find(params[:id])
     render json: @cheatsheet
   end
 
   def create
-    @cheatsheet = Cheatsheet.new(cheatsheet_params)
     if @cheatsheet.save
       render json: @cheatsheet, status: 201
     else
@@ -19,7 +18,6 @@ class CheatsheetsController < ApplicationController
   end
 
   def update
-    @cheatsheet = Cheatsheet.find(params[:id])
     if @cheatsheet.update_attributes(cheatsheet_params)
       render json: @cheatsheet, status: 200
     else
@@ -28,7 +26,7 @@ class CheatsheetsController < ApplicationController
   end
 
   def destroy
-    Cheatsheet.find(params[:id]).destroy
+    @cheatsheet.destroy
     head 200
   end
 

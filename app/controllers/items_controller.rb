@@ -1,18 +1,16 @@
 class ItemsController < ApplicationController
+  load_and_authorize_resource :resource, only: [:index, :create]
+  load_and_authorize_resource shallow: true
+
   def index
-    @cheatsheet = Cheatsheet.find(params[:cheatsheet_id])
-    @items = @cheatsheet.items
     render json: @items
   end
 
   def show
-    @item = Item.find(params[:id])
     render json: @item
   end
 
   def create
-    @cheatsheet = Cheatsheet.find(params[:cheatsheet_id])
-    @item = @cheatsheet.items.build(item_params)
     if @item.save
       render json: @item, status: 201
     else
@@ -21,7 +19,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update_attributes(item_params)
       render json: @item, status: 200
     else
@@ -30,12 +27,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    Item.find(params[:id]).destroy
+    @item.destroy
     head 200
   end
 
   def insert_at
-    @item = Item.find(params[:item_id])
     @item.insert_at(params[:position].to_i)
     render json: @item
   end
