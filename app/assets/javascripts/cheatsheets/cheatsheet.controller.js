@@ -1,16 +1,10 @@
 angular
   .module('app.cheatsheets')
-  .controller('CheatSheetCtrl', ['$scope', '$filter', '$routeParams', 'Cheatsheet', function($scope, $filter, $routeParams, Cheatsheet)
+  .controller('CheatSheetCtrl', ['$scope', 'cheatsheet', function($scope, cheatsheet)
 {
-
-  cheatsheet = { title: '' };
+  $scope.cheatsheet = cheatsheet;
 
   $scope.newItem = {};
-
-  Cheatsheet.find($routeParams.id).then(function (data) {
-    $scope.cheatsheet = data;
-    $scope.cheatsheetLoaded = true;
-  });
 
   $scope.addItem = function(newItem) {
     $scope.cheatsheet.items.create(newItem);
@@ -30,5 +24,4 @@ angular
   $scope.disableEditor = function() {
     $scope.options.editorEnabled = false;
   };
-
 }]);

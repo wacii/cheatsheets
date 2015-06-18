@@ -9,9 +9,8 @@ function config ($routeProvider) {
     .when('/', {
       templateUrl: 'cheatsheet.index.html',
       controller: 'CheatSheetsCtrl',
-      controllerAs: 'Ctrl',
       resolve: {
-        'cheatsheets': function (Cheatsheet) {
+        cheatsheets: function (Cheatsheet) {
           return Cheatsheet.all();
         }
       }
@@ -19,7 +18,11 @@ function config ($routeProvider) {
     .when('/show/:id', {
       templateUrl: 'cheatsheet.show.html',
       controller: 'CheatSheetCtrl',
-      controllerAs: 'Ctrl'
+      resolve: {
+        cheatsheet: function ($route, Cheatsheet) {
+          return Cheatsheet.find($route.current.params.id);
+        }
+      }
     })
     .when('/edit/:id', {
       templateUrl: 'cheatsheet.edit.html',
