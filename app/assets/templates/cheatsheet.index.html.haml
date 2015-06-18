@@ -10,19 +10,21 @@
                           required)
       %span.input-group-btn
         %button.btn.btn-primary(ng-click='addCheatSheet()') Add
-%ul.list-group(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
-  %li.list-group-item
-    %h5
-      %a{:href => "#/show/{{cheatsheet.id}}"}
-        %span(ng-bind="cheatsheet.title")
-      %span.glyphicon.glyphicon-trash.pull-right(ng-click='deleteCheatSheet(cheatsheet)')
-        %button.btn.btn-link.btn-xs.pull-right(ng-click='enableEditor()' id='edit-cheatsheet-link')
-          %span.glyphicon.glyphicon-edit
-        %button.btn.btn-link.btn-xs.pull-right(ng-click='deleteCheatSheet()' id='delete-cheatsheet-link')
-          %span.glyphicon.glyphicon-trash
-      %ng-form.form-group.form(name="editCheatSheetTitle" ng-show='options.editorEnabled')
+%ul.list-group
+  %div(ng-repeat="cheatsheet in cheatsheets | orderBy: 'title' | filter:query")
+    %li.list-group-item
+      %h5(ng-hide='options.editorEnabled')
+        %a{:href => "#/show/{{cheatsheet.id}}"}
+          %span(ng-bind="cheatsheet.title")
+        %button.btn.btn-link.btn-xs.pull-right(ng-click='enableEditor()' id='edit-cheatsheet-link') Edit
+        %button.btn.btn-link.btn-xs.pull-right(ng-click='deleteCheatSheet()' id='delete-cheatsheet-link') Delete
+      %ng-form(name="editCheatSheet" ng-show='options.editorEnabled')
         %input.form-control(type='text' name='edit-cheatsheet-text' ng-model='cheatsheet.title' required)
         %button.btn.btn-link.btn-xs(ng-click='editCheatSheet()') Save
         %button.btn.btn-link.btn-xs(ng-click='disableEditor()') Close
-      %a{:href => "#!/cheatsheet/edit/{{cheatsheet.id}}"}
-        %i.glyphicon.glyphicon-edit.pull-right
+        / %a{:href => "#!/cheatsheet/edit/{{cheatsheet.id}}"}
+        /   %i.glyphicon.glyphicon-edit.pull-right
+
+        //.glyphicon.glyphicon-trash.pull-right
+        //%span.glyphicon.glyphicon-edit
+        //%span.glyphicon.glyphicon-trash
