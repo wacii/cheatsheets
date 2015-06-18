@@ -15,7 +15,8 @@
     %a(ng-href='#/show/{{cheatsheet.id}}')
       .content
         .header(ng-bind='cheatsheet.title')
-        .description(ng-bind='cheatsheet.items.length')
+        .description
+          %ng-pluralize(count='cheatsheet.items.length' when="{'0': 'no items', 'one': '1 item', 'other': '{} items'}")
     %table.ui.basic.table(ng-if='filtered.length === 1')
       %tr(ng-repeat='item in filtered[0].items | filter:query | limitTo:10')
         %td(ng-bind='item.name')
