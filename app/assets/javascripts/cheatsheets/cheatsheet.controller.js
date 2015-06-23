@@ -1,9 +1,9 @@
 angular
   .module('app.cheatsheets')
-  .controller('CheatSheetCtrl', ['$scope', 'cheatsheet', function($scope, cheatsheet)
+  .controller('CheatSheetCtrl', ['$scope', '$filter', 'cheatsheet', function($scope, $filter, cheatsheet)
 {
   $scope.cheatsheet = cheatsheet;
-
+  $scope.cheatsheet.items = $filter('orderBy')($scope.cheatsheet.items, 'rank');
   $scope.newItem = {};
 
   $scope.addItem = function(newItem) {

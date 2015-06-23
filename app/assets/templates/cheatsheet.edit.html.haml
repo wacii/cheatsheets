@@ -3,21 +3,28 @@
   %a(ng-href='#/show/{{cheatsheet.id}}')
     %i.purple.checkmark.icon
 
-.ui.form(ng-form='cheatsheetForm')
+.ui.form(ng-form='cheatsheetForm' )
   .field(ng-class='{ error: cheatsheetForm.title.$invalid }')
     %label Title
     %input(ng-model='cheatsheet.title' name='title' ng-blur='cheatsheet.save()' required)
 
   %h4.ui.dividing.header Items
 
-  .two.fields(ng-form='itemForm' ng-repeat='item in cheatsheet.items')
-    .field(ng-class='{ error: itemForm.name.$invalid }')
-      %input(ng-model='item.name' name='name' ng-blur='item.save()' required)
-    .field(ng-class='{ error: itemForm.description.$invalid }')
-      .ui.action.input
-        %input(ng-model='item.description' name='description' ng-blur='item.save()' required)
-        %button.ui.icon.button(ng-click='cheatsheet.items.remove(item)')
-          %i.remove.icon
+  %div(as-sortable='dragControlListeners' ng-model='cheatsheet.items')
+    .ui.form(ng-repeat='item in cheatsheet.items' as-sortable-item)
+      %div
+        .two.fields(ng-form='itemForm')
+          .field(ng-class='{ error: itemForm.name.$invalid }')
+            .ui.labeled.input
+              .ui.label(as-sortable-item-handle)
+                %i.move.icon
+              %input(ng-model='item.name' name='name' ng-blur='item.save()' required)
+
+          .field(ng-class='{ error: itemForm.description.$invalid }')
+            .ui.action.input
+              %input(ng-model='item.description' name='description' ng-blur='item.save()' required)
+              %button.ui.icon.button(ng-click='cheatsheet.items.remove(item)')
+                %i.remove.icon
 
 .ui.divider
 

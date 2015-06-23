@@ -1,2 +1,2 @@
 angular
-  .module('app.cheatsheets', ['app.services', 'ngRoute', 'templates']);
+  .module('app.cheatsheets', ['app.services', 'ngRoute', 'templates', 'ui.sortable']);

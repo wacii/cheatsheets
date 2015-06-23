@@ -6,5 +6,6 @@
 //= require marked.min
 //= require angular-marked.min
 //= require masonry
+//= require ng-sortable.min
 //= require_tree .
 //= require_tree ../templates
