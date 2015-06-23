@@ -40,7 +40,9 @@
 
     CheatsheetModel.prototype.set = function set (attributes) {
       angular.extend(this, attributes);
-      var _items = this.items;
+      var _items = (this.items || []).sort(function (a, b) {
+        return a.rank - b.rank;
+      });
       this.items = new ItemCollection(_items);
       this.items.cheatsheetId = this.id;
     };

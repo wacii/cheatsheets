@@ -1,11 +1,8 @@
 angular
   .module('app.cheatsheets')
-  .controller('CheatSheetEditCtrl', ['$scope', '$http', '$filter', 'cheatsheet', function($scope, $http, $filter, cheatsheet)
+  .controller('CheatSheetEditCtrl', ['$scope', '$http', 'cheatsheet', function($scope, $http, cheatsheet)
 {
-  var orderBy = $filter('orderBy');
   $scope.cheatsheet = cheatsheet;
-  $scope.cheatsheet.items = orderBy($scope.cheatsheet.items, 'rank')
-
   $scope.newItem = {};
   $scope.addItem = function createItem() {
     if (!$scope.newItem.name || !$scope.newItem.description) return;
